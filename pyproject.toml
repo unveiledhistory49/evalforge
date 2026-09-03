@@ -6,8 +6,8 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = ["numpy>=1.26"]
 [project.optional-dependencies]
-test = ["pytest>=8"]
-dev = ["ruff>=0.6", "mypy>=1.11", "pytest>=8"]
+test = ["pytest>=9.1.1"]
+dev = ["ruff>=0.6", "mypy>=1.11", "pytest>=9.1.1"]
 [project.scripts]
 evalforge = "evalforge.cli:main"
 [build-system]
