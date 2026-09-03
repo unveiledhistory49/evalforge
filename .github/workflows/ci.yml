@@ -1,0 +1,34 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-lint-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -e ".[dev,test]"
+
+      - name: Run tests (make test)
+        run: python -m pytest tests/ -q
+
+      - name: Ruff lint (make lint)
+        run: ruff check src tests
+
+      - name: Ruff format check (make lint)
+        run: ruff format --check src tests
+
+      - name: Typecheck (make typecheck)
+        run: mypy src/evalforge
+
+      - name: Dependency audit
+        run: pip install pip-audit && pip-audit -r requirements.lock
